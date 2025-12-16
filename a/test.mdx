@@ -1,0 +1,103 @@
+import Test from "@/components/test.vue"
+import Test0 from "$/test.vue";
+import Test1 from "$/../components/test.vue";
+import Test2 from "@/xfgnmcgjhh";
+import {Spoiler} from "$/index.ts";
+
+export let doc = document;
+
+export function test() {
+    console.log(document);
+    console.log(doc);
+    console.log(sessionStorage);
+}
+
+export function test0() {
+    console.log(window);
+}
+
+export function test1() {
+    console.log(localStorage);
+}
+
+<Test/>
+<Test0/>
+<Test1/>
+<Test2/>
+
+{test()}
+{test0()}
+{test1()}
+
+<Spoiler title="dtree (not working)" color="green">
+```cpp
+std::random_device rd;
+std::mt19937 gen(rd());
+
+class DTreeNode {
+protected:
+    LL value, priority;
+    DTreeNode *left = nullptr, *right = nullptr;
+
+    static DTreeNode* merge(DTreeNode* node1, DTreeNode* node2) {
+        if (node1 == nullptr) return node2;
+        if (node2 == nullptr) return node1;
+        if (node1->priority < node2->priority) {
+            auto* result = new DTreeNode(node2->value);
+            result->left = merge(node1, node2->left);
+            result->right = node2->right;
+            return result;
+        }
+        else {
+            auto* result = new DTreeNode(node1->value);
+            result->right = merge(node1->right, node2);
+            result->left = node1->left;
+            return result;
+        }
+    }
+
+    Pair<DTreeNode*> split(LL x) {
+        if (value > x) {
+            if (this->left == nullptr) return {nullptr, this};
+            auto [left, right] = this->left->split(x);
+            this->left = right;
+            return {left, this};
+        }
+        else {
+            if (this->right == nullptr) return {this, nullptr};
+            auto [left, right] = this->right->split(x);
+            this->right = left;
+            return {this, right};
+        }
+    }
+
+    void set(DTreeNode* ptr) {
+        this->left = ptr->left;
+        this->right = ptr->right;
+        this->value = ptr->value;
+        this->priority = ptr->priority;
+    }
+
+public:
+    explicit DTreeNode(LL value, LL priority = gen()): value(value), priority(priority) {}
+
+    void add(LL x) {
+        auto [left, right] = this->split(x);
+        auto ptr = merge(merge(left, new DTreeNode(x)), right);
+        set(ptr);
+    }
+
+    void erase(LL x) {
+        auto [lessEqual, greater] = this->split(x);
+        if (lessEqual == nullptr) return set(greater);
+        auto ptr = merge(lessEqual->split(x - 1).first, greater);
+        set(ptr);
+    }
+
+    bool contains(LL x) {
+        if (value == x) return true;
+        return (left != nullptr && left->value <= x ? left->contains(x) : false) || (right != nullptr && right->value > x ? right->contains(x) : false);
+    }
+};
+```
+</Spoiler>

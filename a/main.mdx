@@ -1,0 +1,108 @@
+[//]: # (import Test from "./test.mdx";)
+[//]: # (import {Tabs, TabPanel, Colored, Image, Gallery} from "$/index.ts";)
+import Tabs from "$/tabs.vue";
+import TabPanel from "$/tabPanel.vue";
+import Colored from "$/colored.vue";
+import Image from "$/image.vue";
+import Gallery from "$/gallery.vue";
+
+export let doc = document;
+
+export function test() {
+    console.log(document);
+    console.log(doc);
+    console.log(sessionStorage);
+}
+
+export function test0() {
+    console.log(window);
+}
+
+export function test1() {
+    console.log(localStorage);
+}
+
+{test()}
+
+# Code Syntax Highlighting in MDX
+
+Here's a **JavaScript** code block:
+
+~~~cpp
+template<typename T>
+using ISet = __gnu_pbds::tree<T, __gnu_pbds::null_type, std::less<>, __gnu_pbds::rb_tree_tag, __gnu_pbds::tree_order_statistics_node_update>;
+~~~
+
+latex test: $\cfrac{a^{25}}{a^{16}}$
+
+$$
+\frac{a^{25}}{a^{16}} = a^{25 - 16} = a^9
+$$
+
+<Colored>
+    ```vue
+    <script setup lang="ts">
+        import {RouterView} from 'vue-router'
+    </script>
+
+    <template>
+        <RouterView/>
+    </template>
+
+    <style scoped>
+    </style>
+    ```
+</Colored>
+
+$$
+a^2
+$$
+
+$$
+\cfrac{a}{b} = a \cdot b ^ {20}
+$$
+
+[//]: # (<Test/>)
+
+<Tabs tabs={['code', 'latex']}>
+    <TabPanel value={0}>
+        Here's a **JavaScript** code block:
+        ```vue
+        <script setup lang="ts">
+            import {RouterView} from 'vue-router'
+        </script>
+
+        <template>
+            <RouterView/>
+        </template>
+
+        <style scoped>
+        </style>
+        ```
+    </TabPanel>
+    <TabPanel value={1}>
+        latex test: $\cfrac{a^{25}}{a^{16}}$
+        $$
+        \cfrac{a}{b} = a \cdot b ^ {20}
+        $$
+    </TabPanel>
+</Tabs>
+
+<Image src="https://primefaces.org/cdn/primevue/images/galleria/galleria7.jpg"/>
+<Gallery images={{
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria1.jpg": "1",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria2.jpg": "2",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria3.jpg": "3",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria4.jpg": "4",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria5.jpg": "5",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria6.jpg": "6",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria7.jpg": "7",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria8.jpg": "8",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria9.jpg": "9",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria10.jpg": "10",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria11.jpg": "11",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria12.jpg": "12",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria13.jpg": "13",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria14.jpg": "14",
+    "https://primefaces.org/cdn/primevue/images/galleria/galleria15.jpg": "15"
+}}/>

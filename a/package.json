@@ -1,0 +1,25 @@
+{
+  "name": "untitled",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "^3.1.1",
+    "@types/node": "^24.10.1",
+    "commander": "^14.0.2",
+    "install": "^0.13.0",
+    "recma-jsx": "^1.0.1",
+    "rehype-stringify": "^10.0.1",
+    "remark-mdx": "^3.1.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "unified": "^11.0.5",
+    "vfile": "^6.0.3"
+  }
+}
