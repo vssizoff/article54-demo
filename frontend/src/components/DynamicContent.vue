@@ -13,7 +13,9 @@ const container = ref<HTMLElement | null>(null)
 // Регистрация ваших компонентов
 const components: Record<string, Component> = {
   Test: defineAsyncComponent(() => import('@/components/Test.vue')),
-  Spoiler: defineAsyncComponent(() => import('@/components/Spoiler.vue'))
+  Spoiler: defineAsyncComponent(() => import('@/components/Spoiler.vue')),
+  Tabs: defineAsyncComponent(() => import('@/components/Tabs.vue')),
+  TabPanel: defineAsyncComponent(async () => (await import("primevue")).TabPanel),
 }
 
 const renderContent = () => {
@@ -79,26 +81,30 @@ onUnmounted(() => {
 
 <style scoped>
 .dynamic-content :deep(code) {
-  padding: 0.2em 0.4em;
-  background-color: var(--vp-code-bg, #f5f5f5);
-  border-radius: 4px;
+  //padding: 0.2em 0.4em;
+  //background-color: var(--vp-code-bg, #f5f5f5);
+  //border-radius: 20px;
   font-family: monospace;
   font-size: 0.9em;
 }
 
+.dynamic-content :deep(.typst-frame) {
+  filter: invert(100%) sepia(0%) saturate(367%) hue-rotate(19deg) brightness(105%) contrast(101%);
+}
+
 .dynamic-content :deep(pre) {
-  margin: 1em 0;
+  //margin: 1em 0;
   padding: 1em;
-  background-color: var(--vp-code-bg, #f5f5f5);
-  border-radius: 6px;
+  //background-color: var(--vp-code-bg, #f5f5f5);
+  border-radius: 20px;
   overflow-x: auto;
   line-height: 1.5;
 }
 
 .dynamic-content :deep(.error) {
-  color: var(--vp-c-red, #ff5555);
+  //color: var(--vp-c-red, #ff5555);
   padding: 1em;
-  border: 1px solid var(--vp-c-red, #ff5555);
+  //border: 1px solid var(--vp-c-red, #ff5555);
   border-radius: 4px;
   background-color: #fff5f5;
   margin: 1em 0;
@@ -113,5 +119,9 @@ onUnmounted(() => {
   margin-top: 1.5em;
   margin-bottom: 0.5em;
   line-height: 1.3;
+}
+
+.dynamic-content {
+  width: 100%;
 }
 </style>

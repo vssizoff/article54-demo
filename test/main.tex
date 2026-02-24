@@ -1,0 +1,53 @@
+%! Author = sizoff
+%! Date = 20.02.2026
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{positioning,graphs,calc,decorations.pathmorphing,shapes,arrows.meta,arrows,shapes.misc,fit,matrix,intersections,through,backgrounds,angles,quotes,decorations.markings}
+
+% Document
+\begin{document}
+
+\[
+\frac{x^5}{x}
+\]
+
+\begin{tikzpicture}
+    \coordinate (A) at (-3,0);
+    \coordinate (B) at (0,4);
+    \coordinate (C) at (2,4);
+    \coordinate (D) at (0,0);
+    \coordinate (X) at (1,2);
+    \coordinate (Y) at (-1,2.7);
+    \fill (Y) circle[radius=1.5pt];
+
+    \draw[black] (C) -- (D)
+    \draw[green] (A) -- (X)
+    \draw[green] (B) -- (X)
+
+    \pic [draw, angle radius=5.8mm, "$|$"] {angle = D--A--X};
+    \pic [draw, angle radius=5mm, "$|$"] {angle = X--A--B};
+
+    \pic [draw, angle radius=3mm, "$|$"] {angle = A--B--X};
+    \pic [draw, angle radius=3.5mm, "$|$"] {angle = X--B--C};
+    \pic [draw, angle radius=4mm, "$|$"] {angle = A--B--X};
+    \pic [draw, angle radius=4.5mm, "$|$"] {angle = X--B--C};
+
+    \draw[equal mark] (A) -- (Y);
+    \draw[equal mark] (A) -- (D);
+
+    \draw[equal mark2] (B) -- (Y);
+    \draw[equal mark2] (B) -- (C);
+\end{tikzpicture}
+
+    \begin{enumerate}
+        \item test
+        \item test
+        \item test
+    \end{enumerate}
+
+\end{document}
