@@ -4,7 +4,7 @@ import {inject, onMounted, type PropType, ref, watch} from "vue";
 
 const props = defineProps({
   images: {
-    type: Object as PropType<{[key: string]: string} | Array<string>>,
+    type: Object as PropType<string>,
     required: true
   }
 });
@@ -12,10 +12,11 @@ const props = defineProps({
 const attachmentsResolver = inject<(file: string) => Promise<string> | string>("attachmentsResolver", file => file);
 const thumbnailsResolver = inject<(file: string) => Promise<string> | string>("thumbnailsResolver", file => file);
 
-const images = ref<Array<{src: string, thumb: string, alt: string}>>([]);
+const images = ref<Array<{src: string, thumb: string, alt: string | undefined}>>([]);
 
 async function getImages() {
-  images.value = await Promise.all((Array.isArray(props.images) ? props.images.map(file => ([file, ""])) : Object.entries(props.images)).map(async ([file, alt]) =>
+  const rawImages = JSON.parse(props.images) as {[key: string]: string} | Array<string>;
+  images.value = await Promise.all((Array.isArray(rawImages) ? rawImages.map(file => ([file, ""])) : Object.entries(rawImages)).map(async ([file, alt]) =>
       ({src: await attachmentsResolver(file), thumb: await thumbnailsResolver(file), alt})
   ));
   console.log(images.value)
