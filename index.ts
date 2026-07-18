@@ -1,6 +1,5 @@
 import fs from 'fs/promises';
 import path from 'path';
-import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
 import hljs from 'highlight.js/lib/core';
 import 'highlight.js/styles/github.css';
@@ -27,12 +26,9 @@ const customTags = ["Tabs", "TabPanel", "Spoiler"];
  * Интерфейс данных статьи для фронтенда
  */
 export interface ArticleData {
-    title: string;
-    description?: string;
-    date?: string;
-    tags?: string[];
     content: string;
-    toc: { level: number; title: string; slug: string }[];
+    toc: Array<Heading>;
+    files: Array<string>;
 }
 
 /**
@@ -61,12 +57,14 @@ function postprocessHtml(html: string): string {
         .trim();
 }
 
+// @ts-ignore
 function nestedContainersPlugin(md, tagNames) {
     // Regex for opening: ::: TagName [optional attributes]
     const openRegex = new RegExp(`^\\s*:::\\s+(${tagNames.join('|')})(?:\\s+(.*))?$`, 'i');
     // Regex for closing: ::: /TagName
     const closeRegex = /^:::\s+\/([a-zA-Z0-9_]+)\s*$/;
 
+    // @ts-ignore
     md.block.ruler.before('fence', 'nested_container', (state, startLine, endLine, silent) => {
         const pos = state.bMarks[startLine] + state.tShift[startLine];
         const max = state.eMarks[startLine];
@@ -117,12 +115,14 @@ function nestedContainersPlugin(md, tagNames) {
     });
 
     // Renderers
+    // @ts-ignore
     md.renderer.rules.nested_container_open = (tokens, idx) => {
         const token = tokens[idx];
         const attrs = token.info ? ` ${token.info}` : '';
         return `<${token.tag}${attrs}>\n`;
     };
 
+    // @ts-ignore
     md.renderer.rules.nested_container_close = (tokens, idx) => {
         return `</${tokens[idx].tag}>\n`;
     };
@@ -155,11 +155,8 @@ export async function getArticleData(articlePath: string): Promise<ArticleData> 
     // Читаем содержимое файла
     const fileContent = await fs.readFile(filePath, 'utf-8');
 
-    // Парсим frontmatter
-    const { data: frontmatter, content: rawContent } = matter(fileContent);
-
     // Предварительная обработка контента
-    const cleanedContent = preprocessContent(rawContent);
+    const cleanedContent = preprocessContent(fileContent);
 
     // Настройка Markdown парсера
     const md = new MarkdownIt({
@@ -171,7 +168,7 @@ export async function getArticleData(articlePath: string): Promise<ArticleData> 
             if (lang && hljs.getLanguage(lang)) {
                 try {
                     const highlighted = hljs.highlight(str, { language: lang });
-                    console.error(`<pre class="language-${lang}"><code>${highlighted.value}</code></pre>`);
+                    // console.error(`<pre class="language-${lang}"><code>${highlighted.value}</code></pre>`);
                     return `<pre class="language-${lang}"><code>${highlighted.value}</code></pre>`;
                 } catch (err) {
                     console.error('Highlight error:', err);
@@ -219,6 +216,23 @@ export async function getArticleData(articlePath: string): Promise<ArticleData> 
         level: [1, 2, 3, 4]
     });
 
+    const imageUrls = [];
+    {
+        const tokens = md.parse(cleanedContent, {});
+
+        for (const token of tokens) {
+            if (token.type === 'inline') {
+                // token.children — массив токенов внутри изображения
+                for (const child of token.children || []) {
+                    if (child.type === 'image' && child.attrs) {
+                        const src = child.attrs.find(([name]) => name === 'src')?.[1];
+                        if (src) imageUrls.push(src);
+                    }
+                }
+            }
+        }
+    }
+
     // Генерируем HTML из Markdown
     const rawHtml = md.render(cleanedContent);
 
@@ -226,44 +240,43 @@ export async function getArticleData(articlePath: string): Promise<ArticleData> 
     const htmlContent = postprocessHtml(rawHtml);
 
     // Извлекаем оглавление из контента
-    const toc = extractTableOfContents(htmlContent);
+    const toc = extractHeadings(htmlContent);
 
     return {
-        title: (frontmatter.title as string) || 'Untitled',
-        description: frontmatter.description as string | undefined,
-        date: frontmatter.date as string | undefined,
-        tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
         content: htmlContent,
-        toc
+        toc,
+        files: imageUrls.filter(file => !file.startsWith("http"))
     };
+}
+
+interface Heading {
+    level: number;
+    id: string;
+    content: string;
 }
 
 /**
  * Извлекает оглавление из HTML содержимого
  */
-function extractTableOfContents(html: string): { level: number; title: string; slug: string }[] {
-    const headings: { level: number; title: string; slug: string  }[] = [];
-    const headingRegex = /<h([1-4])\s+id="([^"]+)">(.+?)<\/h\1>/gi;
+function extractHeadings(html: string): Heading[] {
+    // Сначала находим все заголовки
+    const headingRegex = /<(h[1-6])[^>]*>(.*?)<\/\1>/gi;
+    const headings: Heading[] = [];
     let match: RegExpExecArray | null;
 
     while ((match = headingRegex.exec(html)) !== null) {
-        if (match[1] && match[2] && match[3]) {
-            const level = parseInt(match[1], 10);
-            const slug = match[2];
-            const title = match[3]
-                .replace(/<\/?[^>]+(>|$)/g, '') // Удаляем HTML-теги внутри заголовка
-                .replace(/&nbsp;/g, ' ')       // Заменяем HTML-пробелы
-                .trim();
+        const level = parseInt(match[1]?.charAt(1) ?? '0', 10);
+        const openTag = match[0].substring(0, match[0].indexOf('>'));
 
-            headings.push({
-                level,
-                title,
-                slug
-            });
-        }
+        // Извлекаем id из открывающего тега отдельной регуляркой
+        const idMatch = openTag.match(/\bid=["']([^"']*)["']/i);
+        const id = idMatch ? idMatch[1] ?? "" : "";
+
+        const content = match[2]?.trim() ?? "";
+        headings.push({ level, id, content });
     }
 
     return headings;
 }
 
-getArticleData("./test").then(data => console.log(data.content));
+getArticleData("./test").then(data => console.log(data));

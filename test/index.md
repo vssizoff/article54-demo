@@ -52,10 +52,14 @@ import {RouterView} from 'vue-router'
 
 ::: TabPanel value="1"
 
+## test
+
 latex test: $\cfrac{a^{25}}{a^{16}}$
 $$
     \cfrac{a}{b} = a \cdot b ^ {20}
 $$
+
+![](./test.png)
 
 ::: /TabPanel
 
