@@ -52,7 +52,7 @@ function preprocessContent(content: string): string {
 function postprocessHtml(html: string): string {
     return html
         // Удаляем лишние переносы строк
-        .replace(/\n\s*\n/g, '\n')
+        // .replace(/\n\s*\n/g, '\n')
         // Удаляем пустые параграфы
         .replace(/<p>\s*<\/p>/g, '')
         // Удаляем лишние пробелы перед/после тегов
@@ -171,7 +171,7 @@ export async function getArticleData(articlePath: string): Promise<ArticleData> 
             if (lang && hljs.getLanguage(lang)) {
                 try {
                     const highlighted = hljs.highlight(str, { language: lang });
-                    // console.log(`<pre class="language-${lang}"><code>${highlighted.value}</code></pre>`);
+                    console.error(`<pre class="language-${lang}"><code>${highlighted.value}</code></pre>`);
                     return `<pre class="language-${lang}"><code>${highlighted.value}</code></pre>`;
                 } catch (err) {
                     console.error('Highlight error:', err);

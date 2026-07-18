@@ -18,9 +18,11 @@ const content = ref(`
 <pre class="language-vue"><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript">
 <span class="hljs-keyword">import</span> {<span class="hljs-title class_">RouterView</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
 <span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">RouterView</span>/&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
 <span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 </code></pre>
@@ -31,9 +33,11 @@ const content = ref(`
 <pre class="language-vue"><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript">
 <span class="hljs-keyword">import</span> {<span class="hljs-title class_">RouterView</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
 <span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">RouterView</span>/&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
 <span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 </code></pre>
