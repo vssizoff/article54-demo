@@ -18,6 +18,7 @@ async function getImages() {
   images.value = await Promise.all((Array.isArray(props.images) ? props.images.map(file => ([file, ""])) : Object.entries(props.images)).map(async ([file, alt]) =>
       ({src: await attachmentsResolver(file), thumb: await thumbnailsResolver(file), alt})
   ));
+  console.log(images.value)
 }
 
 onMounted(() => getImages());

@@ -16,6 +16,7 @@ const components: Record<string, Component> = {
   Spoiler: defineAsyncComponent(() => import('@/components/Spoiler.vue')),
   Tabs: defineAsyncComponent(() => import('@/components/Tabs.vue')),
   TabPanel: defineAsyncComponent(async () => (await import("primevue")).TabPanel),
+  Gallery: defineAsyncComponent(() => import('@/components/Gallery.vue')),
 }
 
 const renderContent = () => {

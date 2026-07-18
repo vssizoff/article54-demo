@@ -279,4 +279,4 @@ function extractHeadings(html: string): Heading[] {
     return headings;
 }
 
-getArticleData("./test").then(data => console.log(data));
+getArticleData("./test").then(data => console.log(data.content));

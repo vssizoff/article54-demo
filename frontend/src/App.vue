@@ -43,11 +43,30 @@ const content = ref(`
 </code></pre>
 </TabPanel>
 <TabPanel value="1">
+<h2 id="test-1" tabindex="-1">test</h2>
 <p>latex test: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mfrac><msup><mi>a</mi><mn>25</mn></msup><msup><mi>a</mi><mn>16</mn></msup></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\\cfrac{a^{25}}{a^{16}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.276em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.59em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">16</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.74em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">25</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span></span></span></span></span></span></p>
 <p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mfrac><mi>a</mi><mi>b</mi></mfrac></mstyle><mo>=</mo><mi>a</mi><mo>⋅</mo><msup><mi>b</mi><mn>20</mn></msup></mrow><annotation encoding="application/x-tex">    \\cfrac{a}{b} = a \\cdot b ^ {20}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.276em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.59em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">b</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.74em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4445em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">20</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><img src="./test.png" alt="" /></p>
 </TabPanel>
 </Tabs>
+<p><Gallery images='{
+"https://primefaces.org/cdn/primevue/images/galleria/galleria1.jpg": "1",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria2.jpg": "2",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria3.jpg": "3",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria4.jpg": "4",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria5.jpg": "5",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria6.jpg": "6",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria7.jpg": "7",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria8.jpg": "8",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria9.jpg": "9",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria10.jpg": "10",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria11.jpg": "11",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria12.jpg": "12",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria13.jpg": "13",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria14.jpg": "14",
+"https://primefaces.org/cdn/primevue/images/galleria/galleria15.jpg": "15"}'
+/></p>
 `);
 </script>
 
