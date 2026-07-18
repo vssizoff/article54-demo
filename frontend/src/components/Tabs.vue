@@ -7,7 +7,7 @@ export default {
   components: {Tabs, TabList, Tab, TabPanels},
   props: {
     tabs: {
-      type: Object as PropType<string>,
+      type: Object as PropType<Array<string>>,
       required: true,
     }
   }
@@ -17,7 +17,7 @@ export default {
 <template>
   <Tabs value="0" style="--p-tabs-tablist-background: transparent">
 <!--    <TabList>-->
-      <template v-for="(tab, index) in JSON.parse(tabs)">
+      <template v-for="(tab, index) in tabs">
         <Tab :value="index.toString()">{{tab}}</Tab>
       </template>
 <!--    </TabList>-->

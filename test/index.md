@@ -6,13 +6,13 @@ $$
 
 ```typescript
 async function x() {
-    
+    console.log("test")
 }
 ```
 
 ---
 
-<Spoiler title="vghnbvfi" color="green">
+::: Spoiler title="vghnbvfi" color="green"
 
 ```vue
 <script setup lang="ts">
@@ -27,11 +27,13 @@ import {RouterView} from 'vue-router'
 </style>
 ```
 
-</Spoiler>
+::: /Spoiler
 
-<Tabs tabs={['code', 'latex']}>
-<TabPanel value={0}>
-    Here's a **JavaScript** code block:
+::: Tabs :tabs="['a', 'b']"
+
+::: TabPanel value="0"
+
+Here's a **JavaScript** code block:
 
 ```vue
 <script setup lang="ts">
@@ -46,11 +48,15 @@ import {RouterView} from 'vue-router'
 </style>
 ```
 
-</TabPanel>
-    <TabPanel value={1}>
-        latex test: $\cfrac{a^{25}}{a^{16}}$
-        $$
-            \cfrac{a}{b} = a \cdot b ^ {20}
-        $$
-    </TabPanel>
-</Tabs>
+::: /TabPanel
+
+::: TabPanel value="1"
+
+latex test: $\cfrac{a^{25}}{a^{16}}$
+$$
+    \cfrac{a}{b} = a \cdot b ^ {20}
+$$
+
+::: /TabPanel
+
+::: /Tabs
