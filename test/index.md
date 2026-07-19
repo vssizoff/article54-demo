@@ -66,7 +66,7 @@ $$
 ::: /Tabs
 
 
-<Gallery images='{
+<Gallery :images='{
 "https://primefaces.org/cdn/primevue/images/galleria/galleria1.jpg": "1",
 "https://primefaces.org/cdn/primevue/images/galleria/galleria2.jpg": "2",
 "https://primefaces.org/cdn/primevue/images/galleria/galleria3.jpg": "3",

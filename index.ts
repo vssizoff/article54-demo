@@ -22,6 +22,12 @@ hljs.registerLanguage('vue', vueHljs);
 
 const customTags = ["Tabs", "TabPanel", "Spoiler"];
 
+interface Heading {
+    level: number;
+    id: string;
+    content: string;
+}
+
 /**
  * Интерфейс данных статьи для фронтенда
  */
@@ -126,6 +132,30 @@ function nestedContainersPlugin(md, tagNames) {
     md.renderer.rules.nested_container_close = (tokens, idx) => {
         return `</${tokens[idx].tag}>\n`;
     };
+}
+
+/**
+ * Извлекает оглавление из HTML содержимого
+ */
+function extractHeadings(html: string): Heading[] {
+    // Сначала находим все заголовки
+    const headingRegex = /<(h[1-6])[^>]*>(.*?)<\/\1>/gi;
+    const headings: Heading[] = [];
+    let match: RegExpExecArray | null;
+
+    while ((match = headingRegex.exec(html)) !== null) {
+        const level = parseInt(match[1]?.charAt(1) ?? '0', 10);
+        const openTag = match[0].substring(0, match[0].indexOf('>'));
+
+        // Извлекаем id из открывающего тега отдельной регуляркой
+        const idMatch = openTag.match(/\bid=["']([^"']*)["']/i);
+        const id = idMatch ? idMatch[1] ?? "" : "";
+
+        const content = match[2]?.trim() ?? "";
+        headings.push({ level, id, content });
+    }
+
+    return headings;
 }
 
 /**
@@ -247,36 +277,6 @@ export async function getArticleData(articlePath: string): Promise<ArticleData> 
         toc,
         files: imageUrls.filter(file => !file.startsWith("http"))
     };
-}
-
-interface Heading {
-    level: number;
-    id: string;
-    content: string;
-}
-
-/**
- * Извлекает оглавление из HTML содержимого
- */
-function extractHeadings(html: string): Heading[] {
-    // Сначала находим все заголовки
-    const headingRegex = /<(h[1-6])[^>]*>(.*?)<\/\1>/gi;
-    const headings: Heading[] = [];
-    let match: RegExpExecArray | null;
-
-    while ((match = headingRegex.exec(html)) !== null) {
-        const level = parseInt(match[1]?.charAt(1) ?? '0', 10);
-        const openTag = match[0].substring(0, match[0].indexOf('>'));
-
-        // Извлекаем id из открывающего тега отдельной регуляркой
-        const idMatch = openTag.match(/\bid=["']([^"']*)["']/i);
-        const id = idMatch ? idMatch[1] ?? "" : "";
-
-        const content = match[2]?.trim() ?? "";
-        headings.push({ level, id, content });
-    }
-
-    return headings;
 }
 
 getArticleData("./test").then(data => console.log(data.content));
